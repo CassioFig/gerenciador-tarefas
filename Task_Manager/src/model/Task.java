@@ -9,6 +9,7 @@ import model.database.TaskDB;
  */
 public class Task {
     private final TaskDB taskDB = new TaskDB();
+    private int id;
     private String name, priority, situation, date;
 
     public Task() {
@@ -29,6 +30,10 @@ public class Task {
         return taskDB.getTasks();
     }
 
+    public int getId() {
+        return id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -59,6 +64,10 @@ public class Task {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

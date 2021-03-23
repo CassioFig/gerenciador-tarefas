@@ -53,6 +53,7 @@ public class TaskDB {
             while (rs.next()) {                
                 Task task = new Task();
                 
+                task.setId(rs.getInt("id"));
                 task.setName(rs.getString("name"));
                 task.setPriority(rs.getString("priority"));
                 task.setSituation(rs.getString("situation"));
