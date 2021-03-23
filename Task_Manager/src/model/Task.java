@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.util.List;
 import model.database.TaskDB;
 
 /**
@@ -9,7 +9,10 @@ import model.database.TaskDB;
  */
 public class Task {
     private final TaskDB taskDB = new TaskDB();
-    private final String name, priority, situation, date;
+    private String name, priority, situation, date;
+
+    public Task() {
+    }
     
     public Task(String name, String priority, String date) {
         this.name = name;
@@ -20,6 +23,10 @@ public class Task {
     
     public void saveTask() {
         taskDB.registerTask(this);
+    }
+    
+    public List<Task> getTasks() {
+        return taskDB.getTasks();
     }
 
     public String getName() {
@@ -36,6 +43,22 @@ public class Task {
 
     public String getDate() {
         return date;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public void setSituation(String situation) {
+        this.situation = situation;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
     
 }

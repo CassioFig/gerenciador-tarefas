@@ -2,8 +2,11 @@ package model.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Task;
 import utils.Database;
 
@@ -36,7 +39,33 @@ public class TaskDB {
         } catch (SQLException e) {
             System.out.println("Erro ao executar o comando!");
         }
+    }
+    
+    public List<Task> getTasks() {
+        List<Task> list = new ArrayList<>();
+        String sql = "select * from tbtask";
+        Statement statement;
         
+        try {
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
+            while (rs.next()) {                
+                Task task = new Task();
+                
+                task.setName(rs.getString("name"));
+                task.setPriority(rs.getString("priority"));
+                task.setSituation(rs.getString("situation"));
+                task.setDate(rs.getString("date"));
+                
+                list.add(task);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        return list;
     }
     
 }
