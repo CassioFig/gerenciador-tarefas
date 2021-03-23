@@ -41,11 +41,11 @@
                         <Image url="@../images/calendar.png" />
                      </image>
                   </ImageView>
-                  <TableView fx:id="tblToDo" layoutX="8.0" layoutY="60.0" prefHeight="314.0" prefWidth="266.0">
+                  <TableView fx:id="tblToDo" fixedCellSize="0.0" layoutX="8.0" layoutY="60.0" prefHeight="314.0" prefWidth="266.0" snapToPixel="false">
                     <columns>
-                      <TableColumn prefWidth="46.0" style="-fx-background-color: #f2f2f2;" text="ID" />
-                      <TableColumn prefWidth="114.66665649414062" style="-fx-background-color: #f2f2f2;" text="Name" />
-                        <TableColumn prefWidth="104.0" style="-fx-background-color: #f2f2f2;" text="Date" />
+                      <TableColumn fx:id="idToDo" editable="false" prefWidth="46.0" resizable="false" style="-fx-background-color: #f2f2f2;" text="ID" />
+                      <TableColumn fx:id="nameToDo" prefWidth="114.66665649414062" resizable="false" style="-fx-background-color: #f2f2f2;" text="Name" />
+                        <TableColumn fx:id="dateToDo" editable="false" prefWidth="104.0" resizable="false" style="-fx-background-color: #f2f2f2;" text="Date" />
                     </columns>
                   </TableView>
                </children>
@@ -64,9 +64,9 @@
                   </ImageView>
                   <TableView fx:id="tblInProgress" layoutX="10.0" layoutY="61.0" prefHeight="314.0" prefWidth="266.0">
                      <columns>
-                        <TableColumn prefWidth="46.0" style="-fx-background-color: #f2f2f2;" text="ID" />
-                        <TableColumn prefWidth="114.66665649414062" style="-fx-background-color: #f2f2f2;" text="Name" />
-                        <TableColumn prefWidth="104.0" style="-fx-background-color: #f2f2f2;" text="Date" />
+                        <TableColumn fx:id="idProgress" prefWidth="46.0" resizable="false" style="-fx-background-color: #f2f2f2;" text="ID" />
+                        <TableColumn fx:id="nameProgress" prefWidth="114.66665649414062" resizable="false" style="-fx-background-color: #f2f2f2;" text="Name" />
+                        <TableColumn fx:id="dateProgress" prefWidth="104.0" resizable="false" style="-fx-background-color: #f2f2f2;" text="Date" />
                      </columns>
                   </TableView>
                </children>
@@ -85,9 +85,9 @@
                   </ImageView>
                   <TableView fx:id="tblDone" layoutX="10.0" layoutY="62.0" prefHeight="314.0" prefWidth="266.0">
                      <columns>
-                        <TableColumn prefWidth="46.0" style="-fx-background-color: #f2f2f2;" text="ID" />
-                        <TableColumn prefWidth="114.66665649414062" style="-fx-background-color: #f2f2f2;" text="Name" />
-                        <TableColumn prefWidth="104.0" style="-fx-background-color: #f2f2f2;" text="Date" />
+                        <TableColumn fx:id="idDone" prefWidth="46.0" resizable="false" style="-fx-background-color: #f2f2f2;" text="ID" />
+                        <TableColumn fx:id="nameDone" prefWidth="114.66665649414062" resizable="false" style="-fx-background-color: #f2f2f2;" text="Name" />
+                        <TableColumn fx:id="dateDone" prefWidth="104.0" resizable="false" style="-fx-background-color: #f2f2f2;" text="Date" />
                      </columns>
                   </TableView>
                </children>
