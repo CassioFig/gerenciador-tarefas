@@ -20,10 +20,6 @@ public class TaskDB {
     }
     
     public void registerTask(Task task) {
-        // Temporario
-        Date d = new Date();
-        
-        
         String sql = "insert into tbtask(name, priority, situation, date) "
                 + "values (?, ?, ?, ?)";
         
