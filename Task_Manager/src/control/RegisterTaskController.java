@@ -19,7 +19,7 @@ import model.Task;
  * @author Cássio Figueiredo
  */
 public class RegisterTaskController implements Initializable {
-
+    
     @FXML
     private TextField txtName;
     @FXML

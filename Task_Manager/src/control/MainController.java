@@ -2,8 +2,6 @@ package control;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Task;
 import utils.TaskIterator;
@@ -29,6 +28,7 @@ public class MainController implements Initializable {
     
     private Task task;
     private TaskIterator it;
+    private UpdateTaskController update;
 
     @FXML
     private TableView<Task> tblToDo;
@@ -56,12 +56,15 @@ public class MainController implements Initializable {
     private TableColumn<Task, String> nameDone;
     @FXML
     private TableColumn<Task, String> dateDone;
+    @FXML
+    private Button btnUpdate;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initializeToDoTable();
-        
+        initializeInProgressTable();
+
     }
     
     private void initializeToDoTable() {
@@ -69,10 +72,18 @@ public class MainController implements Initializable {
         nameToDo.setCellValueFactory(new PropertyValueFactory<>("Name"));
         dateToDo.setCellValueFactory(new PropertyValueFactory<>("Date"));
         
-        tblToDo.setItems(getTasksToDo());
+        tblToDo.setItems(getTasks("To Do"));
     }
     
-    private ObservableList<Task> getTasksToDo() {
+    private void initializeInProgressTable() {
+        idProgress.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        nameProgress.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        dateProgress.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        
+        tblInProgress.setItems(getTasks("In Progress"));
+    }
+    
+    private ObservableList<Task> getTasks(String situation) {
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         
         task = new Task();
@@ -81,21 +92,12 @@ public class MainController implements Initializable {
         while (it.hasNext()) {
             Task tsk = (Task) it.next();
             
-            if (isTaskToDo(tsk.getSituation())) {
+            if (tsk.getSituation().equals(situation)) {
                 tasks.add(tsk);
             }
         }
         
         return tasks;
-    }
-    
-    private boolean isTaskToDo(String situation) {
-        if (situation.endsWith("To Do")) {
-            return true;
-            
-        } else {
-            return false;
-        }
     }
 
     @FXML
@@ -114,5 +116,34 @@ public class MainController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-    
+
+    @FXML
+    private void btnUpdateAction(ActionEvent event) throws IOException {
+        Task tsk = tblToDo.getSelectionModel().getSelectedItem();
+        Stage stage = new Stage();
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/UpdateTask.fxml"));
+        Parent updateController = loader.load();
+        
+        Scene scene = new Scene(updateController);
+        UpdateTaskController controller = loader.getController();
+        controller.initData(tsk);
+        
+        stage.setScene(scene);
+        stage.setWidth(440);
+        stage.setHeight(322);
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    @FXML
+    private void tblToDoClicked(MouseEvent event) {
+        Task tsk = tblToDo.getSelectionModel().getSelectedItem();
+        
+        if (tsk != null) {
+            btnUpdate.setDisable(false);
+        }
+    }
+
 }

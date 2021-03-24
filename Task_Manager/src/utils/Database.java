@@ -25,8 +25,6 @@ public class Database {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
             
-            System.out.println("Conexão efetuada com sucessso!");
-            
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Não foi possível conectar!");
         }
