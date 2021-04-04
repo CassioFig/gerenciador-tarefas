@@ -9,11 +9,10 @@ import java.sql.SQLException;
  * @author Cássio Figueiredo
  */
 public class Database {
-    private final String url = "jdbc:mysql://task-manager-db.cezy4juwft5j.us-east-1."
-            + "rds.amazonaws.com:3306/task_manager_db";
+    private final String url = "jdbc:mysql://localhost:3306/task-db";
     private final String driver = "com.mysql.cj.jdbc.Driver";
-    private final String user = "admin";
-    private final String password = "TaskDbsecurity";
+    private final String user = "root";
+    private final String password = "";
 
     public Database() {
     }

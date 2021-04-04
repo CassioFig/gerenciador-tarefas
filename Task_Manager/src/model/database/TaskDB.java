@@ -36,6 +36,7 @@ public class TaskDB {
             
             pst.executeUpdate();
             
+            connection.close();
         } catch (SQLException e) {
             System.out.println("Erro ao executar o comando!");
         }
@@ -62,11 +63,34 @@ public class TaskDB {
                 list.add(task);
             }
             
+            connection.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
         
         return list;
+    }
+    
+    public void updateTask(Task task) {
+        String sql = "update tbtask set name = ?, date = ?, situation = ? "
+                + "where id = ?";
+        
+        PreparedStatement pst;
+        try {
+            pst = connection.prepareStatement(sql);
+            
+            pst.setString(1, task.getName());
+            pst.setString(2, task.getDate());
+            pst.setString(3, task.getSituation());
+            pst.setInt(4, task.getId());
+            
+            pst.executeUpdate();
+            pst.close();
+            
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar o comando!");
+        }
     }
     
 }

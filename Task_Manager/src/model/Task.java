@@ -26,6 +26,10 @@ public class Task {
         taskDB.registerTask(this);
     }
     
+    public void updateTask() {
+        taskDB.updateTask(this);
+    }
+    
     public List<Task> getTasks() {
         return taskDB.getTasks();
     }
