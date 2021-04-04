@@ -26,6 +26,7 @@ import utils.TaskIterator;
  */
 public class MainController implements Initializable {
     
+    private String lastSelection = "";
     private Task task;
     private TaskIterator it;
     private UpdateTaskController update;
@@ -119,7 +120,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnUpdateAction(ActionEvent event) throws IOException {
-        Task tsk = tblToDo.getSelectionModel().getSelectedItem();
+        Task tsk = this.getSelectionModel();
         Stage stage = new Stage();
         
         FXMLLoader loader = new FXMLLoader();
@@ -136,6 +137,20 @@ public class MainController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
+    
+    private Task getSelectionModel() {      
+        if (this.lastSelection.equals("To Do")) {
+            return tblToDo.getSelectionModel().getSelectedItem();
+            
+        } else if (this.lastSelection.equals("In Progress")) {
+            return tblInProgress.getSelectionModel().getSelectedItem();
+            
+        } else if (this.lastSelection.equals("Done")) {
+            return tblDone.getSelectionModel().getSelectedItem();
+        }
+        
+        return null;
+    }
 
     @FXML
     private void tblToDoClicked(MouseEvent event) {
@@ -143,7 +158,27 @@ public class MainController implements Initializable {
         
         if (tsk != null) {
             btnUpdate.setDisable(false);
+            this.lastSelection = "To Do";
         }
     }
 
+    @FXML
+    private void tblInProgressClicked(MouseEvent event) {
+        Task tsk = tblInProgress.getSelectionModel().getSelectedItem();
+        
+        if (tsk != null) {
+            btnUpdate.setDisable(false);
+            this.lastSelection = "In Progress";
+        }
+    }
+
+    @FXML
+    private void tblDoneClicked(MouseEvent event) {
+        Task tsk = tblDone.getSelectionModel().getSelectedItem();
+        
+        if (tsk != null) {
+            btnUpdate.setDisable(false);
+            this.lastSelection = "Done";
+        }
+    }
 }
