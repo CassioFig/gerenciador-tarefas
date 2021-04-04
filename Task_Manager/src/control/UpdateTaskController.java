@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.Task;
 
 /**
@@ -68,6 +69,20 @@ public class UpdateTaskController implements Initializable {
     
     @FXML
     private void btnUpdateAction(ActionEvent event) {
+       Task task  = new Task();
+        
+        task.setId(Integer.parseInt(txtId.getText()));
+        task.setName(txtName.getText());
+        task.setDate(String.valueOf(txtDate.getValue()));
+        task.setSituation(cbxSituation.getValue());
+        
+        task.updateTask();
+        closeWindow();
+    }
+    
+    private void closeWindow() {
+        Stage stage = (Stage) btnUpdate.getScene().getWindow();
+        stage.close();
     }
     
 }
