@@ -65,6 +65,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initializeToDoTable();
         initializeInProgressTable();
+        initializeDoneTable();
 
     }
     
@@ -82,6 +83,14 @@ public class MainController implements Initializable {
         dateProgress.setCellValueFactory(new PropertyValueFactory<>("Date"));
         
         tblInProgress.setItems(getTasks("In Progress"));
+    }
+    
+    private void initializeDoneTable() {
+        idDone.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        nameDone.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        dateDone.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        
+        tblDone.setItems(getTasks("Done"));
     }
     
     private ObservableList<Task> getTasks(String situation) {
