@@ -103,6 +103,11 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <Button fx:id="btnDelete" disable="true" layoutX="268.0" layoutY="432.0" mnemonicParsing="false" onAction="#btnDeleteAction" prefHeight="32.0" prefWidth="98.0" text="Delete Task">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

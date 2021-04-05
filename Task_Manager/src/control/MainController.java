@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -59,6 +62,8 @@ public class MainController implements Initializable {
     private TableColumn<Task, String> dateDone;
     @FXML
     private Button btnUpdate;
+    @FXML
+    private Button btnDelete;
     
     
     @Override
@@ -66,7 +71,7 @@ public class MainController implements Initializable {
         initializeToDoTable();
         initializeInProgressTable();
         initializeDoneTable();
-
+        
     }
     
     private void initializeToDoTable() {
@@ -160,13 +165,14 @@ public class MainController implements Initializable {
         
         return null;
     }
-
+    
     @FXML
     private void tblToDoClicked(MouseEvent event) {
         Task tsk = tblToDo.getSelectionModel().getSelectedItem();
         
         if (tsk != null) {
             btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
             this.lastSelection = "To Do";
         }
     }
@@ -177,17 +183,47 @@ public class MainController implements Initializable {
         
         if (tsk != null) {
             btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
             this.lastSelection = "In Progress";
         }
     }
-
+    
     @FXML
     private void tblDoneClicked(MouseEvent event) {
         Task tsk = tblDone.getSelectionModel().getSelectedItem();
         
         if (tsk != null) {
             btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
             this.lastSelection = "Done";
         }
+    }    
+    
+    @FXML
+    private void btnDeleteAction(ActionEvent event) {
+        Task tsk = this.getSelectionModel();
+        
+        if (confirmDelete()) {
+            tsk.deleteTask();
+        }
+    }
+    
+    private boolean confirmDelete() {
+        ButtonType btnYes = new ButtonType("Yes");
+        ButtonType btnNo = new ButtonType("No");
+        
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        
+        confirmation.getButtonTypes().setAll(btnYes, btnNo);
+        confirmation.setTitle("Delete Task");
+        confirmation.setHeaderText("Are you sure you want to delete this task?");
+        
+        Optional<ButtonType> result = confirmation.showAndWait();
+        
+        if (result.get().equals(btnYes)) {
+            return true;
+        }
+        
+        return false;
     }
 }
