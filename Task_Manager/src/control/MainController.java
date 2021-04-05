@@ -32,7 +32,6 @@ public class MainController implements Initializable {
     private String lastSelection = "";
     private Task task;
     private TaskIterator it;
-    private UpdateTaskController update;
 
     @FXML
     private TableView<Task> tblToDo;
@@ -119,12 +118,12 @@ public class MainController implements Initializable {
     private void btnNewTaskAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         
-        Parent register = FXMLLoader.load(getClass()
-                .getResource("../view/RegisterTask.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/RegisterTask.fxml"));
+        Parent register = loader.load();
         
         Scene scene = new Scene(register);
-        
-        
+
         stage.setScene(scene);
         stage.setWidth(440);
         stage.setHeight(322);
@@ -150,6 +149,7 @@ public class MainController implements Initializable {
         stage.setHeight(322);
         stage.setResizable(false);
         stage.show();
+//        stage.close();
     }
     
     private Task getSelectionModel() {      
@@ -206,6 +206,8 @@ public class MainController implements Initializable {
         if (confirmDelete()) {
             tsk.deleteTask();
         }
+        
+        resetTables();
     }
     
     private boolean confirmDelete() {
@@ -225,5 +227,11 @@ public class MainController implements Initializable {
         }
         
         return false;
+    }
+    
+    private void resetTables() {
+        initializeToDoTable();
+        initializeInProgressTable();
+        initializeDoneTable();
     }
 }
