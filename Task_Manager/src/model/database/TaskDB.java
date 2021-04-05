@@ -93,4 +93,22 @@ public class TaskDB {
         }
     }
     
+    public void deleteTask(Task task) {
+        String sql = "delete from tbtask where id = ?";
+        
+        PreparedStatement pst;
+        try {
+            pst = connection.prepareStatement(sql);
+            
+            pst.setInt(1, task.getId());
+            
+            pst.executeUpdate();
+            pst.close();
+            
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar o comando!");
+        }
+    }
+    
 }

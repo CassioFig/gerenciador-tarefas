@@ -30,6 +30,10 @@ public class Task {
         taskDB.updateTask(this);
     }
     
+    public void deleteTask() {
+        taskDB.deleteTask(this);
+    }
+    
     public List<Task> getTasks() {
         return taskDB.getTasks();
     }
