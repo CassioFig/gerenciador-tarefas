@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import model.Task;
 import utils.Database;
 
@@ -38,7 +39,7 @@ public class TaskDB {
             
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Erro ao executar o comando!");
+            error();
         }
     }
     
@@ -65,7 +66,7 @@ public class TaskDB {
             
             connection.close();
         } catch (SQLException e) {
-            System.out.println(e);
+            error();
         }
         
         return list;
@@ -89,7 +90,7 @@ public class TaskDB {
             
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Erro ao executar o comando!");
+            error();
         }
     }
     
@@ -107,8 +108,16 @@ public class TaskDB {
             
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Erro ao executar o comando!");
+            error();
         }
+    }
+    
+    private void error() {
+        Alert erro = new Alert(Alert.AlertType.ERROR);
+        
+        erro.setTitle("Error");
+        erro.setHeaderText("Error when performing the action!");
+        erro.showAndWait();
     }
     
 }

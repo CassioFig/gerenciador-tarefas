@@ -3,6 +3,7 @@ package utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Database {
             connection = DriverManager.getConnection(url, user, password);
             
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Não foi possível conectar!");
+            error();
         }
         
         return connection;
@@ -34,10 +35,16 @@ public class Database {
     public void closeConnection(Connection con) {
         try {
             con.close();
-            System.out.println("Conexão fechada com sucesso!");
-            
         } catch (SQLException e) {
-            System.out.println("Não foi possível desconectar!");
+            System.out.println(e);
         }
+    }
+    
+    private void error() {
+        Alert erro = new Alert(Alert.AlertType.ERROR);
+        
+        erro.setTitle("Error");
+        erro.setHeaderText("Database connection error!");
+        erro.showAndWait();
     }
 }
