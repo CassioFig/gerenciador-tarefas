@@ -129,6 +129,7 @@ public class MainController implements Initializable {
         stage.setHeight(322);
         stage.setResizable(false);
         stage.show();
+        stage.setOnCloseRequest(close -> resetTables());
     }
 
     @FXML
@@ -149,7 +150,7 @@ public class MainController implements Initializable {
         stage.setHeight(322);
         stage.setResizable(false);
         stage.show();
-//        stage.close();
+        stage.setOnCloseRequest(close -> resetTables());
     }
     
     private Task getSelectionModel() {      
@@ -229,7 +230,7 @@ public class MainController implements Initializable {
         return false;
     }
     
-    private void resetTables() {
+    public void resetTables() {
         initializeToDoTable();
         initializeInProgressTable();
         initializeDoneTable();

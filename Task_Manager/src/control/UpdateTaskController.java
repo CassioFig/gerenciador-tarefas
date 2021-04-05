@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import model.Task;
 
 /**
@@ -77,12 +76,6 @@ public class UpdateTaskController implements Initializable {
         task.setSituation(cbxSituation.getValue());
         
         task.updateTask();
-        closeWindow();
-    }
-    
-    private void closeWindow() {
-        Stage stage = (Stage) btnUpdate.getScene().getWindow();
-        stage.close();
     }
     
 }
