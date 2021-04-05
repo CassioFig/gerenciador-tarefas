@@ -137,7 +137,7 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../view/UpdateTask.fxml"));
+        loader.setLocation(getClass().getResource("/view/UpdateTask.fxml"));
         Parent updateController = loader.load();
         
         Scene scene = new Scene(updateController);
