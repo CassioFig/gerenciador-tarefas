@@ -10,10 +10,10 @@ import javafx.scene.control.Alert;
  * @author Cássio Figueiredo
  */
 public class Database {
-    private final String url = "jdbc:mysql://localhost:3306/task-db";
+    private final String url = "jdbc:mysql://35.199.73.82:3306/TaskManager";
     private final String driver = "com.mysql.cj.jdbc.Driver";
-    private final String user = "root";
-    private final String password = "";
+    private final String user = "user";
+    private final String password = "taskManagerSecurity";
 
     public Database() {
     }
